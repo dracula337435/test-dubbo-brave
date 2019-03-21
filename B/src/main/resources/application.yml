@@ -4,3 +4,6 @@ dubbo:
     name: test-dubbo-brave-B
   registry:
     address: zookeeper://127.0.0.1:2181
+logging:
+  pattern:
+    level: "%5p [%X{traceId},%X{spanId}]"

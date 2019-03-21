@@ -8,6 +8,7 @@ import io.dracula.test.dubbo.brave.InterfaceC;
 import io.dracula.test.dubbo.brave.InterfaceD;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 /**
  * @author dk
@@ -25,7 +26,8 @@ public class InterfaceBImpl implements InterfaceB {
 
     @Override
     public String toB(String name) {
-        logger.info(RpcContext.getContext().getAttachments().toString());
+        logger.info("MDC为" + MDC.getCopyOfContextMap().toString());
+        logger.info("RpcContext中的Attachments为" + RpcContext.getContext().getAttachments().toString());
         logger.info("in B");
         String tmp = "在B内，" + name;
         logger.info("先调C");
