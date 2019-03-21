@@ -1,4 +1,4 @@
-package io.dracula.test.dubbo.brace.B;
+package io.dracula.test.dubbo.brave;
 
 /**
  * @author dk

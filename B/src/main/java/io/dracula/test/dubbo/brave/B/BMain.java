@@ -1,4 +1,4 @@
-package io.dracula.test.dubbo.brace.B;
+package io.dracula.test.dubbo.brave.B;
 
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.springframework.boot.SpringApplication;

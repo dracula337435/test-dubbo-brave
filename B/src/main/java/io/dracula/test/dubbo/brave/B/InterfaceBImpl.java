@@ -1,7 +1,8 @@
-package io.dracula.test.dubbo.brace.B;
+package io.dracula.test.dubbo.brave.B;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.RpcContext;
+import io.dracula.test.dubbo.brave.InterfaceB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
