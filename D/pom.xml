@@ -12,4 +12,12 @@
 
     <artifactId>test-dubbo-brave-D</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.dracula</groupId>
+            <artifactId>test-dubbo-brave-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>
