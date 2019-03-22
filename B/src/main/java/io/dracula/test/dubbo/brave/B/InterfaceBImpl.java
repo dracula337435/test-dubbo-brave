@@ -26,7 +26,7 @@ public class InterfaceBImpl implements InterfaceB {
 
     @Override
     public String toB(String name) {
-        logger.info("MDC为" + MDC.getCopyOfContextMap().toString());
+//        logger.info("MDC为" + MDC.getCopyOfContextMap().toString());
         logger.info("RpcContext中的Attachments为" + RpcContext.getContext().getAttachments().toString());
         logger.info("in B");
         String tmp = "在B内，" + name;
