@@ -73,3 +73,10 @@ D日志为：
 INFO [7acef2e32e227f65,7acef2e32e227f65] 18648 --- [:20882-thread-5] i.d.test.dubbo.brave.D.InterfaceDImpl    : in D
 INFO [7acef2e32e227f65,7acef2e32e227f65] 18648 --- [:20882-thread-5] i.d.test.dubbo.brave.D.InterfaceDImpl    : RpcContext中的Attachments为{interface=io.dracula.test.dubbo.brave.InterfaceD, input=236}
 ```
+
+试验了```rest```连接下的链路跟踪，和预计不同。将B提供者换为```rest```，则```zipkin```收到的链路为
+```
+B -> C和D
+仅A
+```
+细分析，```zipkin```中可见a->b的```span-id```没对上

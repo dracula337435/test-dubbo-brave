@@ -31,7 +31,7 @@ public class InterfaceBImpl implements InterfaceB {
         logger.info("in B");
         String tmp = "在B内，" + name;
         logger.info("先调C");
-        tmp = interfaceC.toC(name);
+        tmp = interfaceC.toC(tmp);
         logger.info("再调D");
         tmp = interfaceD.toD(tmp);
         return tmp;
