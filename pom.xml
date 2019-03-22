@@ -19,6 +19,7 @@
         <module>B</module>
         <module>C</module>
         <module>D</module>
+        <module>E</module>
         <module>interface</module>
     </modules>
 

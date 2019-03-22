@@ -1,0 +1,12 @@
+#
+dubbo:
+  application:
+    name: test-dubbo-brave-E
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20883
+logging:
+  pattern:
+    level: "%5p [%X{traceId},%X{spanId}]"

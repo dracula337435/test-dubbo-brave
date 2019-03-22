@@ -9,6 +9,12 @@ A -> B ┤
        └> D
 ```
 访问[A的/toB端点](http://localhost:8080/toB)发起整个链路的一次调用
+```
+            ┌> C
+A -> E -> B ┤
+            └> D
+```
+访问[A的/toE端点](http://localhost:8080/toE)发起整个链路的一次调用
 
 参考了文章[服务化改造实践（三） | Dubbo + Zipkin](https://www.jianshu.com/p/923677e56253)
 
@@ -74,9 +80,27 @@ INFO [7acef2e32e227f65,7acef2e32e227f65] 18648 --- [:20882-thread-5] i.d.test.du
 INFO [7acef2e32e227f65,7acef2e32e227f65] 18648 --- [:20882-thread-5] i.d.test.dubbo.brave.D.InterfaceDImpl    : RpcContext中的Attachments为{interface=io.dracula.test.dubbo.brave.InterfaceD, input=236}
 ```
 
-试验了```rest```连接下的链路跟踪，和预计不同。将B提供者换为```rest```，则```zipkin```收到的链路为
+试验了```rest```连接下的链路跟踪，断开了。将B提供者换为```rest```，则```zipkin```收到的链路情况如下
+当结构为
+```
+       ┌> C
+A -> B ┤
+       └> D
+```
+链路（按时间先后）为
 ```
 B -> C和D
 仅A
+```
+当结构为
+```
+            ┌> C
+A -> E -> B ┤
+            └> D
+```
+链路（按时间先后）为
+```
+B -> C和D
+A -> E
 ```
 细分析，```zipkin```中可见a->b的```span-id```没对上
