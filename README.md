@@ -4,17 +4,11 @@
 
 调用关系如下图形所示  
 ```
-       ┌> C
-A -> B ┤
-       └> D
+           ┌> C
+A -┬--> B -┤
+   └> E ┘  └> D
 ```
-访问[A的/toB端点](http://localhost:8080/toB)发起整个链路的一次调用
-```
-            ┌> C
-A -> E -> B ┤
-            └> D
-```
-访问[A的/toE端点](http://localhost:8080/toE)发起整个链路的一次调用
+访问A的[/toB端点](http://localhost:8080/toB),[/toE端点](http://localhost:8080/toE)发起整个链路的一次调用  
 
 参考了文章[服务化改造实践（三） | Dubbo + Zipkin](https://www.jianshu.com/p/923677e56253)
 
