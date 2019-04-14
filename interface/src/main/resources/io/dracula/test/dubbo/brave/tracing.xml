@@ -27,6 +27,11 @@
                 <property name="closeTimeout" value="500"/>
             </bean>
         </property>
+        <property name="finishedSpanHandlers">
+            <list>
+                <bean class="io.dracula.test.dubbo.brave.AppendProductTagFinishedSpanHandler" />
+            </list>
+        </property>
         <property name="currentTraceContext">
             <bean class="brave.spring.beans.CurrentTraceContextFactoryBean">
                 <property name="scopeDecorators">
