@@ -19,8 +19,6 @@ public class ProductFilter implements Filter {
 
     public static final String PRODUCT_ATTACHMENTS_KEY = "product";
 
-    public static final String FRONT_ID_ATTACHMENTS_KEY = "front-id";
-
     public static final String SEND_ID_ATTACHMENTS_KEY = "send-id";
 
     private InfoHolderForFilter infoHolderForFilter;
@@ -39,26 +37,37 @@ public class ProductFilter implements Filter {
         // 如果是提供者
         if(isProviderSide){
             String remoteProduct = rpcContext.getAttachment(PRODUCT_ATTACHMENTS_KEY);
-            String frontId = rpcContext.getAttachment(FRONT_ID_ATTACHMENTS_KEY);
             String sendId = rpcContext.getAttachment(SEND_ID_ATTACHMENTS_KEY);
+            if(sendId == null || "".equals(sendId)){
+                sendId = getNewSendId(null);
+            }
             productChainContext.setPreviousProduct(remoteProduct);
-            productChainContext.setFrontId(frontId);
             productChainContext.setSendId(sendId);
-            logger.info("previousProduct"+productChainContext.getPreviousProduct());
+            logger.info("previousProduct="+productChainContext.getPreviousProduct());
             // 如果本product为null
             // 如果传来的product为null
             // 如果不一致
             if(product==null || !product.equals(remoteProduct)){
-                logger.info("一个新产品");
+                productChainContext.setFrontId(sendId);
+                productChainContext.setSendId(getNewSendId(productChainContext.getFrontId()));
+                logger.info("到了一个新产品，frontId="+productChainContext.getFrontId()+"，sendId="+productChainContext.getSendId());
             }
         }
         // 如果是消费者
         else{
             rpcContext.setAttachment(PRODUCT_ATTACHMENTS_KEY, product);
-            rpcContext.setAttachment(FRONT_ID_ATTACHMENTS_KEY, productChainContext.getFrontId());
             rpcContext.setAttachment(SEND_ID_ATTACHMENTS_KEY, productChainContext.getSendId());
         }
         return invoker.invoke(invocation);
+    }
+
+
+    private String getNewSendId(String frontId){
+        if(frontId == null || "".equals(frontId)){
+            return "原sendId为空于是生成一个";
+        }else{
+            return frontId+"，根据原sendId生成一个新sendId";
+        }
     }
 
 }
