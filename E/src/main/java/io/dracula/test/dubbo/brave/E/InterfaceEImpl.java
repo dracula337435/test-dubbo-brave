@@ -28,7 +28,7 @@ public class InterfaceEImpl implements InterfaceE {
     public String toE(String name) {
         logger.info("in E");
         logger.info("RpcContext中的Attachments为" + RpcContext.getContext().getAttachments().toString());
-        logger.info("打通背后和业务代码，spanId="+tracing.currentTraceContext().get().spanIdString());
+        logger.info("打通背后和业务代码，spanId="+Long.toHexString(tracing.currentTraceContext().get().spanId()));
         return interfaceB.toB("在E内，" + name);
     }
 

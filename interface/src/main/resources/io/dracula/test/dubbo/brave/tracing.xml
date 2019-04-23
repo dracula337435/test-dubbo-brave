@@ -15,7 +15,7 @@
     <!-- 2\. zipkin 相关的配置 -->
     <!-- 使用 OKHttp 来发送 trace 信息到 Zipkin Server。这里的 Zipkin Server 启动在本地 -->
     <bean id="sender" class="zipkin2.reporter.beans.OkHttpSenderFactoryBean">
-        <property name="endpoint" value="http://192.168.99.100:9411/api/v2/spans"/>
+        <property name="endpoint" value="http://192.168.99.103:9411/api/v2/spans"/>
     </bean>
 
     <bean id="tracing" class="brave.spring.beans.TracingFactoryBean">
@@ -27,17 +27,8 @@
                 <property name="closeTimeout" value="500"/>
             </bean>
         </property>
-        <property name="finishedSpanHandlers">
-            <list>
-                <bean class="io.dracula.test.dubbo.brave.AppendProductTagFinishedSpanHandler" />
-            </list>
-        </property>
         <property name="currentTraceContext">
-            <bean class="brave.spring.beans.CurrentTraceContextFactoryBean">
-                <property name="scopeDecorators">
-                    <bean class="brave.context.slf4j.MDCScopeDecorator" factory-method="create"/>
-                </property>
-            </bean>
+            <bean class="brave.context.slf4j.MDCCurrentTraceContext" factory-method="create" />
         </property>
     </bean>
 
