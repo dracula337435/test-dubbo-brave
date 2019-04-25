@@ -43,7 +43,6 @@ public class ProductFilter implements Filter {
             }
             productChainContext.setPreviousProduct(remoteProduct);
             productChainContext.setSendId(sendId);
-            logger.info("previousProduct="+productChainContext.getPreviousProduct());
             // 如果本product为null
             // 如果传来的product为null
             // 如果不一致
@@ -61,7 +60,11 @@ public class ProductFilter implements Filter {
         return invoker.invoke(invocation);
     }
 
-
+    /**
+     *
+     * @param frontId
+     * @return
+     */
     private String getNewSendId(String frontId){
         if(frontId == null || "".equals(frontId)){
             return "原sendId为空于是生成一个";

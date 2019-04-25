@@ -41,6 +41,8 @@
         </property>
     </bean>
 
-    <bean id="infoHolderForFilter" class="io.dracula.test.dubbo.brave.product.InfoHolderForFilter" />
+    <bean id="infoHolderForFilter" class="io.dracula.test.dubbo.brave.product.InfoHolderForFilter" >
+        <property name="product" value="${product}" />
+    </bean>
 
 </beans>
