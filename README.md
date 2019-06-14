@@ -99,3 +99,7 @@ A -> E -> B(rest) ┤
 B -> C和D
 A -> E
 ```
+
+另外，A是spring-web-mvc的，在A上加上brave，以期在A中也能正常打印```traceId```和```spanId```  
+而且如果一个```web-request```中有多个```dubbo-request```，其```traceId```相同  
+但是目前```traceId```不同，有问题
