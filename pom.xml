@@ -13,6 +13,7 @@
     <groupId>io.dracula</groupId>
     <artifactId>test-dubbo-brave</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <modules>
         <module>A</module>

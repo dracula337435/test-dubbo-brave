@@ -8,7 +8,7 @@
 A -┬--> B -┤
    └> E ┘  └> D
 ```
-访问A的[/toB端点](http://localhost:8080/toB),[/toE端点](http://localhost:8080/toE)发起整个链路的一次调用  
+访问A的[/toB端点](http://localhost:8080/toB)，[/toE端点](http://localhost:8080/toE)发起整个链路的一次调用  
 
 参考了文章[服务化改造实践（三） | Dubbo + Zipkin](https://www.jianshu.com/p/923677e56253)
 
@@ -40,7 +40,7 @@ private static final String CONSOLE_LOG_PATTERN = "%clr(%d{${LOG_DATEFORMAT_PATT
 ```
 注意其中的```%clr(${LOG_LEVEL_PATTERN:-%5p})```，和```spring-cloud```中的配置对应起来了
 
-```brave```自带和```dubbo```集成的方式，传```attachments```使用```X-B3-```系列，放入```mdc```则没有使用```X-B3-```，
+```brave```自带和```dubbo```集成的方式，传```attachments```使用```X-B3-```系列，放入```mdc```的则没有使用```X-B3-```，
 可见```InterfaceBImpl```打出的日志：
 ```
 INFO [bb1160909becc04d,bb1160909becc04d] 9512 --- [:20880-thread-2] i.d.test.dubbo.brave.B.InterfaceBImpl    : MDC为{traceId=bb1160909becc04d, spanId=bb1160909becc04d}
