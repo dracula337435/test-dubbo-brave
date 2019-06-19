@@ -9,7 +9,7 @@
        ">
 
     <!-- 1\. 修改 dubbo 服务暴露配置，在 filter chain 中增加 zipkin 的 tracing 过滤器 -->
-    <dubbo:provider filter="tracing"/>
+    <dubbo:provider filter="context2inv,tracing"/>
     <dubbo:consumer filter="tracing"/>
 
     <!-- 2\. zipkin 相关的配置 -->
