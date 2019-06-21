@@ -99,3 +99,9 @@ A -> E -> B(rest) ┤
 B -> C和D
 A -> E
 ```
+
+发现了```rest```方式下收到```attachments```的问题，进而导致```brave```跟踪失败的问题，出在哪  
+现有机制，
+```RpcContextFilter```通过报文头传递的```attachments```被放入```RpcContext```，
+但是```brave```的```TracingFilter```从```Invocation```中取，
+```brvae```取不到跟踪信息，认为是一笔新交易，于是就又有了一个新```trace```。
