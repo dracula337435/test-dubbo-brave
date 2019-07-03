@@ -10,7 +10,8 @@ import org.springframework.context.annotation.ImportResource;
  */
 @SpringBootApplication
 @DubboComponentScan
-@ImportResource("classpath:io/dracula/test/dubbo/brave/tracing.xml")
+@ImportResource({"classpath:io/dracula/test/dubbo/brave/tracing.xml",
+        "classpath:io/dracula/test/dubbo/brave/http-tracing.xml"})
 public class AMain {
 
     public static void main(String[] args){

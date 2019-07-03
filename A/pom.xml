@@ -22,6 +22,10 @@
             <artifactId>test-dubbo-brave-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.zipkin.brave</groupId>
+            <artifactId>brave-instrumentation-spring-webmvc</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
