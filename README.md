@@ -107,4 +107,16 @@ A -> E
 ```brvae```取不到跟踪信息，认为是一笔新交易，于是就又有了一个新```trace```。  
 ```client```/```consumer```端```RpcContextFilter```将```PpcContext```中的```attachments```
 放入```HTTP headers```。而另一方面，```brave```起一个新```span```是在```client```端，放入```Invocation```，
-没传成功新的```span```。造成下游（```rest```方式）和上游```span```一样。
+没传成功新的```span```。造成下游（```rest```方式）和上游```span```一样。  
+简图表示：  
+```
+server端attachments赋值方向        <-                              <-
+
+dubbo组件                      TracingFilter                 RpcContextFilter
+attachments载体             span      Invocation       RpcContext      HTTP headers
+
+client端attachments赋值方向        ->                              ->
+```
+修正方法为：  
+在```server```端，在中间，增加```Invocation```<-```RpcContext```的动作。  
+在```client```端，在中间，增加```Invocation```->```RpcContext```的动作。
