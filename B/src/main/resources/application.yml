@@ -3,8 +3,8 @@ dubbo:
   application:
     name: test-dubbo-brave-B
   protocol:
-    name: dubbo
-    port: 20880
+    name: rest
+    port: 18080
   registry:
     address: zookeeper://127.0.0.1:2181
 logging:
