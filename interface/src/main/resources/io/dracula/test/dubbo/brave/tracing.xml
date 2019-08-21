@@ -29,7 +29,9 @@
         </property>
         <property name="finishedSpanHandlers">
             <list>
-                <bean class="io.dracula.test.dubbo.brave.AppendProductTagFinishedSpanHandler" />
+                <bean class="io.dracula.test.dubbo.brave.AppendProductTagFinishedSpanHandler" >
+                    <property name="product" value="${dubbo.application.name}-product" />
+                </bean>
             </list>
         </property>
         <property name="currentTraceContext">
