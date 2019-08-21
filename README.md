@@ -101,7 +101,10 @@ A -> E
 ```
 
 发现了```rest```方式下收到```attachments```的问题，进而导致```brave```跟踪失败的问题，出在哪  
-现有机制，
-```RpcContextFilter```通过报文头传递的```attachments```被放入```RpcContext```，
+现有机制，```server```/```provider```端
+```RpcContextFilter```把通过```HTTP headers```传递的```attachments```放入```RpcContext```，
 但是```brave```的```TracingFilter```从```Invocation```中取，
-```brvae```取不到跟踪信息，认为是一笔新交易，于是就又有了一个新```trace```。
+```brvae```取不到跟踪信息，认为是一笔新交易，于是就又有了一个新```trace```。  
+```client```/```consumer```端```RpcContextFilter```将```PpcContext```中的```attachments```
+放入```HTTP headers```。而另一方面，```brave```起一个新```span```是在```client```端，放入```Invocation```，
+没传成功新的```span```。造成下游（```rest```方式）和上游```span```一样。
