@@ -14,7 +14,6 @@ public class AppendProductTagFinishedSpanHandler extends FinishedSpanHandler {
     @Override
     public boolean handle(TraceContext context, MutableSpan span) {
         //span中有localServiceName，但是其为null
-//        String localServiceName = span.localServiceName();
         span.tag("LocalProduct", product);
         return true;
     }
