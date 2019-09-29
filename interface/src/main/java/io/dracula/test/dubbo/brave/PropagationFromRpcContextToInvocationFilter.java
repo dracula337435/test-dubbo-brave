@@ -1,12 +1,9 @@
 package io.dracula.test.dubbo.brave;
 
-import brave.Tracing;
-import brave.propagation.Propagation;
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,21 +11,7 @@ import java.util.Map;
  * @author dk
  */
 @Activate(group = {Constants.PROVIDER}, value = "context2inv")
-public class PropagationFromRpcContextToInvocationFilter implements Filter {
-
-    private List<String> keys;
-
-    public void setTracing(Tracing tracing) {
-        if(tracing != null){
-            Propagation<String> propagation = tracing.propagation();
-            if(propagation != null){
-                List<String> tmp = propagation.keys();
-                if(tmp != null && tmp.size() != 0){
-                    keys = tmp;
-                }
-            }
-        }
-    }
+public class PropagationFromRpcContextToInvocationFilter extends PropagationKeysAssignFilter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
