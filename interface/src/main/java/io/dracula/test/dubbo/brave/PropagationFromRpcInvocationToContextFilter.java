@@ -14,20 +14,13 @@ import java.util.Map;
 public class PropagationFromRpcInvocationToContextFilter extends PropagationKeysAssignFilter {
 
     @Override
-    public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        if(keys != null){
-            Map<String, String> attachmentsInContext = RpcContext.getContext().getAttachments();
-            Map<String, String> attachmentsInInv = invocation.getAttachments();
-            if(attachmentsInContext != null && attachmentsInInv != null){
-                for(String key: keys){
-                    String valueInContext = attachmentsInInv.get(key);
-                    if(valueInContext != null){
-                        attachmentsInContext.put(key, valueInContext);
-                    }
-                }
-            }
-        }
-        return invoker.invoke(invocation);
+    public Map<String, String> getOriMap(Invoker<?> invoker, Invocation invocation) {
+        return invocation.getAttachments();
+    }
+
+    @Override
+    public Map<String, String> getDesMap(Invoker<?> invoker, Invocation invocation) {
+        return RpcContext.getContext().getAttachments();
     }
 
 }

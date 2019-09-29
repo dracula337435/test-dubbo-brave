@@ -2,7 +2,9 @@ package io.dracula.test.dubbo.brave;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.rpc.*;
+import com.alibaba.dubbo.rpc.Invocation;
+import com.alibaba.dubbo.rpc.Invoker;
+import com.alibaba.dubbo.rpc.RpcContext;
 
 import java.util.Map;
 
@@ -14,20 +16,12 @@ import java.util.Map;
 public class PropagationFromRpcContextToInvocationFilter extends PropagationKeysAssignFilter {
 
     @Override
-    public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        if(keys != null){
-            Map<String, String> attachmentsInContext = RpcContext.getContext().getAttachments();
-            Map<String, String> attachmentsInInv = invocation.getAttachments();
-            if(attachmentsInContext != null && attachmentsInInv != null){
-                for(String key: keys){
-                    String valueInContext = attachmentsInContext.get(key);
-                    if(valueInContext != null){
-                        attachmentsInInv.put(key, valueInContext);
-                    }
-                }
-            }
-        }
-        return invoker.invoke(invocation);
+    public Map<String, String> getOriMap(Invoker<?> invoker, Invocation invocation) {
+        return RpcContext.getContext().getAttachments();
     }
 
+    @Override
+    public Map<String, String> getDesMap(Invoker<?> invoker, Invocation invocation) {
+        return invocation.getAttachments();
+    }
 }
